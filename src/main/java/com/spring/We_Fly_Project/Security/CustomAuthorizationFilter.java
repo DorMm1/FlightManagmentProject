@@ -22,9 +22,11 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
-
+    
+    //Checking the users role with JWT + checking if valid token
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        //grants access to paths that doesnt require logging in.
         if (request.getServletPath().equals("/user/**") ||request.getServletPath().equals("/login") ) {
             filterChain.doFilter(request, response);
         } else {
