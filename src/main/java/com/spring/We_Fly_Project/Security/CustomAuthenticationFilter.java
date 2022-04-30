@@ -31,7 +31,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
-
+    //Checking login credentials using the UsernamePasswordAuthenticationToken
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String username = request.getParameter("username");
@@ -40,7 +40,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         return authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
     }
-
+    
+    
+    //After user successful login generating the JWT
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         User user = (User)authentication.getPrincipal();
